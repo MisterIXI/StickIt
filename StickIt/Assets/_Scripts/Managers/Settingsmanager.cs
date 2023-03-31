@@ -11,6 +11,7 @@ public class Settingsmanager : MonoBehaviour
         }
     }
     [field: SerializeField] public PlayerSettings PlayerSettings { get; private set; }
+    [field: SerializeField] public TapeSettings TapeSettings { get; private set; }
     private void Awake()
     {
         if (Instance != null)

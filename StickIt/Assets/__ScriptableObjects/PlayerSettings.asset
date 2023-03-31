@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69de1590627ff794498bf2047067efb2, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  <MovementGizmos>k__BackingField: 0
-  <MovementSpeed>k__BackingField: 1
-  <Acceleration>k__BackingField: 5
-  <CayoteeTime>k__BackingField: 0
-  <JumpVelocity>k__BackingField: 0
-  <JumpReleaseCap>k__BackingField: 0
-  <GroundedCheckGizmos>k__BackingField: 0
+  <MovementGizmos>k__BackingField: 1
+  <MovementSpeed>k__BackingField: 11.4
+  <Acceleration>k__BackingField: 44.3
+  <CayoteeTime>k__BackingField: 1.33
+  <JumpVelocity>k__BackingField: 10
+  <JumpReleaseCap>k__BackingField: 5
+  <GroundedCheckGizmos>k__BackingField: 1
   <GroundedCheckVerticalOffset>k__BackingField: 0.58
   <GroundedCheckWidth>k__BackingField: 1
   <GroundedCheckHeight>k__BackingField: 0.18
