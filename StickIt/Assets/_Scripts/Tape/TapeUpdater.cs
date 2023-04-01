@@ -5,6 +5,7 @@ using UnityEngine;
 public class TapeUpdater : MonoBehaviour
 {
     public bool IsStuck { get; private set; }
+    public float TapeLength { get; private set; }
     public SpriteRenderer TapeRenderer { get; private set; }
     private BoxCollider2D _collider;
     private HashSet<Stickie> _stickies;
@@ -25,17 +26,17 @@ public class TapeUpdater : MonoBehaviour
         TapeRenderer.transform.position = midPoint;
         TapeRenderer.transform.right = endPos - startPos;
         // get distance between mouse and tape start pos
-        float distance = Vector2.Distance(endPos, startPos);
+        TapeLength = Vector2.Distance(endPos, startPos);
         // set currentTape tile width to distance
-        TapeRenderer.size = new Vector2(distance, TapeRenderer.size.y);
+        TapeRenderer.size = new Vector2(TapeLength, TapeRenderer.size.y);
         // set collider size to distance
-        _collider.size = new Vector2(distance, _collider.size.y);
+        _collider.size = new Vector2(TapeLength, _collider.size.y);
         // get all stickies in collider
         var stickies = Physics2D.OverlapBoxAll(_collider.bounds.center, _collider.size, transform.eulerAngles.z);
         // filter colliders that don't have a stickie component
         var stickieComponents = stickies.Select(c => c.GetComponent<Stickie>()).Where(c => c != null).ToHashSet();
         // unhighlight stickies that are no longer in collider
-        foreach (var stickie in _highlightedStickies)
+        foreach (var stickie in _stickies)
         {
             if (!stickieComponents.Contains(stickie))
             {
@@ -45,12 +46,12 @@ public class TapeUpdater : MonoBehaviour
         // highlight stickies that are new in collider
         foreach (var stickie in stickieComponents)
         {
-            if (!_highlightedStickies.Contains(stickie))
+            if (!_stickies.Contains(stickie))
             {
                 stickie.Highlight();
             }
         }
-        _highlightedStickies = stickieComponents;
+        _stickies = stickieComponents;
     }
 
     public void CleanUp()

@@ -18,7 +18,10 @@ MonoBehaviour:
   <CayoteeTime>k__BackingField: 1.33
   <JumpVelocity>k__BackingField: 10
   <JumpReleaseCap>k__BackingField: 5
+  <GroundedCheckLayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 119
   <GroundedCheckGizmos>k__BackingField: 1
-  <GroundedCheckVerticalOffset>k__BackingField: 0.58
+  <GroundedCheckVerticalOffset>k__BackingField: 0.7
   <GroundedCheckWidth>k__BackingField: 1
   <GroundedCheckHeight>k__BackingField: 0.18

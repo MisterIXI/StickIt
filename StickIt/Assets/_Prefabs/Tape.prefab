@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3857728861051077194}
   - component: {fileID: 3015479939785992367}
   - component: {fileID: 2597477395998653418}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tape
-  m_TagString: Untagged
+  m_TagString: Tape
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 65
   m_Sprite: {fileID: 21300000, guid: be5233dafde1b04488c4375de0f05979, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.87058824}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2

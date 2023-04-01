@@ -47,13 +47,22 @@ public class TapeController : MonoBehaviour
     private void CancelTape()
     {
         TapePool.ReturnTape(_currentTape);
+        _currentTape.CleanUp();
         _currentTape = null;
     }
 
     private void FinishTape()
     {
         UpdateTape();
-        _currentTape = null;
+        if (_currentTape.TapeLength > _tapeSettings.TapeMinLength)
+        {
+            _currentTape.StickIt();
+            _currentTape = null;
+        }
+        else
+        {
+            CancelTape();
+        }
     }
 
     private void OnLMBInput(InputAction.CallbackContext context)

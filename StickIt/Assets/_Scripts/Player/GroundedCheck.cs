@@ -24,7 +24,7 @@ public class GroundedCheck : MonoBehaviour
     {
         if (IsJumping)
         {
-            if (_rigidbody2D.velocity.y < 0)
+            if (_rigidbody2D.velocity.y <= 0)
                 IsJumping = false;
         }
         else
@@ -35,7 +35,7 @@ public class GroundedCheck : MonoBehaviour
 
     private void UpdateGroundedState()
     {
-        bool newGrounded = Physics2D.OverlapBox(transform.position + Vector3.down * _verticalOffset, new Vector2(_checkWidth, _checkHeight), 0, LayerMask.GetMask("Ground"));
+        bool newGrounded = Physics2D.OverlapBox(transform.position + Vector3.down * _verticalOffset, new Vector2(_checkWidth, _checkHeight), 0, _playerSettings.GroundedCheckLayerMask);
         if (newGrounded)
             IsGrounded = true;
         else
