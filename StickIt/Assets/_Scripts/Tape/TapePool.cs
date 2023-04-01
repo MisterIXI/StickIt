@@ -3,9 +3,10 @@ using UnityEngine;
 public class TapePool : MonoBehaviour
 {
     public static TapePool Instance { get; private set; }
-    [field: SerializeField] public SpriteRenderer TapePrefab { get; private set; }
+    [field: SerializeField] public TapeUpdater TapePrefab { get; private set; }
     private TapeSettings _tapeSettings;
-    private Queue<SpriteRenderer> _tapePool;
+    private Queue<TapeUpdater> _tapePool;
+    private int OrderNumber = 100;
 
     private void Awake()
     {
@@ -21,19 +22,21 @@ public class TapePool : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        _tapePool = new Queue<TapeUpdater>();
         _tapeSettings = Settingsmanager.Instance.TapeSettings;
         SpawnObjects();
     }
 
-    public static SpriteRenderer GetTape()
+    public static TapeUpdater GetTape()
     {
         if (Instance._tapePool.Count == 0)
             Instance.AddObjectToQueue();
         var tape = Instance._tapePool.Dequeue();
         tape.gameObject.SetActive(true);
+        tape.TapeRenderer.sortingOrder = Instance.OrderNumber++;
         return tape;
     }
-    public static void ReturnTape(SpriteRenderer tape)
+    public static void ReturnTape(TapeUpdater tape)
     {
         tape.gameObject.SetActive(false);
         Instance._tapePool.Enqueue(tape);

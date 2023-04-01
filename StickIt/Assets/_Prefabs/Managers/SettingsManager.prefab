@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PlayerSettings>k__BackingField: {fileID: 11400000, guid: 13be310fe33701042925221a364ff7a1, type: 2}
+  <TapeSettings>k__BackingField: {fileID: 11400000, guid: 934f5b1b4cf75b448afcceb3d67de2c0, type: 2}

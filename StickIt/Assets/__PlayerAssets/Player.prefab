@@ -51,7 +51,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -107,7 +107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973df00d20ad23b4394844647a074347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundedCheck: {fileID: 0}
 --- !u!1 &166482317915136393
 GameObject:
   m_ObjectHideFlags: 0
