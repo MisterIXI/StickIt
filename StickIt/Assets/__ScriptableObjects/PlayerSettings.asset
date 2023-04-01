@@ -25,3 +25,7 @@ MonoBehaviour:
   <GroundedCheckVerticalOffset>k__BackingField: 0.7
   <GroundedCheckWidth>k__BackingField: 1
   <GroundedCheckHeight>k__BackingField: 0.18
+  <CameraGizmos>k__BackingField: 0
+  <CameraFollowTime>k__BackingField: 0.3
+  <CameraMaxSpeed>k__BackingField: 10
+  <CameraIdleDistance>k__BackingField: 20

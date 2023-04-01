@@ -19,5 +19,11 @@ public class PlayerSettings : ScriptableObject
     [field: SerializeField] public float GroundedCheckWidth { get; private set; } = 1f;
     [field: SerializeField] public float GroundedCheckHeight { get; private set; } = 0.18f;
 
+    [field: Header("CameraSettings")]
+    [field: SerializeField] public bool CameraGizmos { get; private set; } = false;
+    [field: SerializeField][field: Range(0f, 1f)] public float CameraFollowTime { get; private set; } = 0.1f;
+    [field: SerializeField] public float CameraMaxSpeed { get; private set; } = 10f;
+    [field: SerializeField] public float CameraIdleDistance { get; private set; } = 20f;
+
 
 }

@@ -13,10 +13,17 @@ public class PlayerController : MonoBehaviour
     private Vector2 _moveVelocity;
     private Rigidbody2D _rb;
     private GroundedCheck _groundedCheck;
-
+    public static PlayerController Instance { get; private set; }
     public static event Action OnJump;
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            Debug.LogWarning("PlayerController already exists");
+            return;
+        }
+        Instance = this;
         _playerSettings = Settingsmanager.Instance.PlayerSettings;
         _groundedCheck = GetComponent<GroundedCheck>();
         _rb = GetComponent<Rigidbody2D>();
@@ -68,6 +75,8 @@ public class PlayerController : MonoBehaviour
     {
         InputManager.OnMove -= OnMoveInput;
         InputManager.OnJump -= OnJumpInput;
+        if (Instance == this)
+            Instance = null;
     }
     private void OnDrawGizmos()
     {

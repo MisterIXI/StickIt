@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class TapeController : MonoBehaviour
 {
+    private Vector2 _mouseInput;
     private Vector2 _mousePos;
     private Vector2 _tapeStartPos;
     private TapeUpdater _currentTape;
@@ -23,6 +24,7 @@ public class TapeController : MonoBehaviour
     }
     private void Update()
     {
+        _mousePos = Camera.main.ScreenToWorldPoint(_mouseInput);
         if (_currentTape != null)
         {
             UpdateTape();
@@ -102,7 +104,8 @@ public class TapeController : MonoBehaviour
         if (context.performed)
         {
             // mouse position in world space
-            _mousePos = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
+            _mouseInput = context.ReadValue<Vector2>();
+            // _mousePos = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
         }
     }
 

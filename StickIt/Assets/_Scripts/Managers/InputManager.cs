@@ -24,6 +24,7 @@ public class InputManager : MonoBehaviour
     public static event Action<CallbackContext> OnLMB;
     public static event Action<CallbackContext> OnRMB;
     public static event Action<CallbackContext> OnJump;
+    public static event Action<CallbackContext> OnPause;
     private void OnMoveInput(CallbackContext context)
     {
         OnMove?.Invoke(context);
@@ -49,6 +50,11 @@ public class InputManager : MonoBehaviour
         OnJump?.Invoke(context);
     }
 
+    private void OnPauseInput(CallbackContext context)
+    {
+        OnPause?.Invoke(context);
+    }
+
     private void SubscribeToInput()
     {
         _playerInput.actions["Move"].started += OnMoveInput;
@@ -70,6 +76,10 @@ public class InputManager : MonoBehaviour
         _playerInput.actions["Jump"].started += OnJumpInput;
         _playerInput.actions["Jump"].performed += OnJumpInput;
         _playerInput.actions["Jump"].canceled += OnJumpInput;
+
+        _playerInput.actions["Pause"].started += OnPauseInput;
+        _playerInput.actions["Pause"].performed += OnPauseInput;
+        _playerInput.actions["Pause"].canceled += OnPauseInput;
     }
 
     private void UnSubscribeToInput()
@@ -93,6 +103,10 @@ public class InputManager : MonoBehaviour
         _playerInput.actions["Jump"].started -= OnJumpInput;
         _playerInput.actions["Jump"].performed -= OnJumpInput;
         _playerInput.actions["Jump"].canceled -= OnJumpInput;
+
+        _playerInput.actions["Pause"].started -= OnPauseInput;
+        _playerInput.actions["Pause"].performed -= OnPauseInput;
+        _playerInput.actions["Pause"].canceled -= OnPauseInput;
     }
 
 
