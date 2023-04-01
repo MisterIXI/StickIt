@@ -17,7 +17,7 @@ public class RuleProgress : MonoBehaviour
 
     public void SwitchColor(bool isPositiveProgress)
     {
-        Debug.Log("Switching color");
+        // Debug.Log("Switching color");
         ProgressImage.color = isPositiveProgress ? new Color(0f, 0.5882352941f, 0f) : new Color(0.5882352941f, 0f, 0f);
     }
 }

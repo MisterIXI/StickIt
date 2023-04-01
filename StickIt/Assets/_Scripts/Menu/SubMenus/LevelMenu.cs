@@ -17,9 +17,14 @@ public class LevelMenu : MenuBase
         _levelButtons = new Button[_levelSettings.LevelCollection.Length];
         for (int i = 0; i < _levelSettings.LevelCollection.Length; i++)
         {
+            int levelIndex = i;
             _levelButtons[i] = Instantiate(LevelButtonPrefab, transform);
-            _levelButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = "" + (i + 1);
-            _levelButtons[i].onClick.AddListener(() => LoadLevel(_levelSettings.LevelCollection[i].name));
+            _levelButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = "" + (i + 1).ToString("D2");
+            _levelButtons[i].onClick.AddListener(() =>
+            {
+                Debug.Log($"Loading level with id: {levelIndex}; length: {_levelSettings.LevelCollection.Length}");
+                LoadLevel(_levelSettings.LevelCollection[levelIndex]);
+            });
             _levelButtons[i].transform.SetParent(LevelButtonContainer);
         }
     }

@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     public static void LoadLevel(string levelName)
     {
         // check if level is in levelcollection
-        if (!Instance._levelSettings.LevelCollection.Any(l => l.name == levelName))
+        if (!Instance._levelSettings.LevelCollection.Any(l => l == levelName))
         {
             Debug.LogError($"Level {levelName} not found in LevelCollection");
             return;

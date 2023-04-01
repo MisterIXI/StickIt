@@ -2567,6 +2567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae70a0785c21cd44ba145b6a0321f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <RulesTopText>k__BackingField: {fileID: 8000783476324853491}
+  <RulesBottomText>k__BackingField: {fileID: 2123367993188700317}
   <PauseButton>k__BackingField: {fileID: 8628134464259330258}
   <RulesPanel>k__BackingField: {fileID: 4829888408811101956}
   <RulePrefab>k__BackingField: {fileID: 4036097100046005417, guid: 894023b4d9451a84bbf5c6c7fd4c92cf, type: 3}

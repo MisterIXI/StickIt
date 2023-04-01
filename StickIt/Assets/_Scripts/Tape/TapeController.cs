@@ -75,7 +75,7 @@ public class TapeController : MonoBehaviour
         {
             StartTape();
         }
-        else if (context.canceled)
+        else if (context.canceled && _currentTape != null)
         {
             FinishTape();
         }

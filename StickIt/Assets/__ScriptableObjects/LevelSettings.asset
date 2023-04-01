@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5039207148b7b439160b51585bc798, type: 3}
   m_Name: LevelSettings
   m_EditorClassIdentifier: 
-  <LevelCollection>k__BackingField: []
+  <LevelCount>k__BackingField: 0
+  LevelCollection:
+  - Level01
+  - Level02
+  - Level03

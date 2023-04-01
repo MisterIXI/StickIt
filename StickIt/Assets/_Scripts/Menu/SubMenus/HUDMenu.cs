@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class HUDMenu : MenuBase
 {
+    [field: SerializeField] public TextMeshProUGUI RulesTopText { get; private set; }
+    [field: SerializeField] public TextMeshProUGUI RulesBottomText { get; private set; }
     [field: SerializeField] public Button PauseButton { get; private set; }
     [field: SerializeField] public RectTransform RulesPanel { get; private set; }
     [field: SerializeField] public RectTransform RulePrefab { get; private set; }
@@ -18,6 +20,7 @@ public class HUDMenu : MenuBase
     private void OnSceneChange(Scene oldScene, Scene newScene)
     {
         _ruleToRect.Clear();
+        SetHeaderStyle(false);
         if (newScene.name == "MainScene")
             return;
         BaseRule[] rules = RuleManager.Instance.Rules;
@@ -29,6 +32,7 @@ public class HUDMenu : MenuBase
             _ruleToRect.Add(rules[i], ruleProgress);
         }
         RuleManager.Instance.OnRuleChange += OnRuleChange;
+        RuleManager.Instance.OnAllRulesCompleted += OnAllRulesCompleted;
     }
 
     private void OnRuleChange(RuleChangeType type, BaseRule rule, float value, bool isPositiveProgress)
@@ -52,6 +56,24 @@ public class HUDMenu : MenuBase
         }
     }
 
+    private void OnAllRulesCompleted()
+    {
+        SetHeaderStyle(true);
+    }
+
+    private void SetHeaderStyle(bool isFinished)
+    {
+        if (isFinished)
+        {
+            RulesTopText.fontStyle |= FontStyles.Strikethrough;
+            RulesBottomText.fontStyle |= FontStyles.Strikethrough;
+        }
+        else
+        {
+            RulesTopText.fontStyle &= ~FontStyles.Strikethrough;
+            RulesBottomText.fontStyle &= ~FontStyles.Strikethrough;
+        }
+    }
     private void OnRuleCompletion(BaseRule rule)
     {
         _ruleToRect[rule].GetComponentInChildren<Text>().color = Color.green;

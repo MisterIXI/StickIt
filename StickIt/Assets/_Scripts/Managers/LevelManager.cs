@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour
         LoadProgressFromPrefs();
     }
 
-    public static void SolveCurrentLevel()
+    public static void MarkCurrentLevelAsComplete()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         SolvedLevels.Add(currentSceneName);
@@ -39,8 +39,8 @@ public class LevelManager : MonoBehaviour
         SolvedLevels.Clear();
         foreach (var level in _levelSettings.LevelCollection)
         {
-            if (PlayerPrefs.GetInt(level.name, 0) == 1)
-                SolvedLevels.Add(level.name);
+            if (PlayerPrefs.GetInt(level, 0) == 1)
+                SolvedLevels.Add(level);
         }
     }
     private void OnDestroy()

@@ -116,7 +116,7 @@ public class InputManager : MonoBehaviour
         if (Instance == this)
         {
             Instance = null;
+            UnSubscribeToInput();
         }
-        UnSubscribeToInput();
     }
 }

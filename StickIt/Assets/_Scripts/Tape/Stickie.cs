@@ -16,7 +16,7 @@ public class Stickie : MonoBehaviour
     public void Stick()
     {
         stickCount++;
-        Debug.Log($"Stickie.Stick() {stickCount}");
+        // Debug.Log($"Stickie.Stick() {stickCount}");
         if (stickCount == 1)
         {
             _rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -26,7 +26,7 @@ public class Stickie : MonoBehaviour
     public void UnStick()
     {
         stickCount--;
-        Debug.Log($"Stickie.UnStick() {stickCount}");
+        // Debug.Log($"Stickie.UnStick() {stickCount}");
         if (stickCount == 0)
         {
             _rb.constraints = _constraints;
