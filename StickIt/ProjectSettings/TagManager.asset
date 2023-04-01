@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TapeCutter
   - Tape
+  - Flag
   layers:
   - Default
   - TransparentFX

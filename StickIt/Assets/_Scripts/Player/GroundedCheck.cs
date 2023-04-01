@@ -16,7 +16,7 @@ public class GroundedCheck : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private void Awake()
     {
-        _playerSettings = Settingsmanager.Instance.PlayerSettings;
+        _playerSettings = SettingsManager.Instance.PlayerSettings;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         PlayerController.OnJump += OnJump;
     }

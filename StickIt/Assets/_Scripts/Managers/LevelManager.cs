@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
         Instance = this;
         transform.parent = null;
         DontDestroyOnLoad(gameObject);
-        _levelSettings = Settingsmanager.Instance.LevelSettings;
+        _levelSettings = SettingsManager.Instance.LevelSettings;
         SolvedLevels = new HashSet<string>();
         LoadProgressFromPrefs();
     }

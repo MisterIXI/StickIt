@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        _playerSettings = Settingsmanager.Instance.PlayerSettings;
+        _playerSettings = SettingsManager.Instance.PlayerSettings;
         _playerTransform = PlayerController.Instance.transform;
         transform.position = new Vector3(_playerTransform.position.x, 0, -10f);
     }

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public static GameState GameState { get; private set; }
     private LevelSettings _levelSettings;
     public static event Action<GameState, GameState> OnGameStateChanged;
+    public static event Action OnSceneLoad;
+    [field: SerializeField] private bool _startInLevel;
     private void Awake()
     {
         if (Instance != null)
@@ -20,10 +22,30 @@ public class GameManager : MonoBehaviour
         Instance = this;
         transform.parent = null;
         DontDestroyOnLoad(gameObject);
-        _levelSettings = Settingsmanager.Instance.LevelSettings;
+        _levelSettings = SettingsManager.Instance.LevelSettings;
         OnGameStateChanged += OnGameStateChange;
+        SceneManager.activeSceneChanged += OnSceneChanged;
+        ChangeGameState(GameState.Playing);
     }
 
+    private void Start()
+    {
+        if (_startInLevel)
+        {
+            ChangeGameState(GameState.Playing);
+            MenuManager.SwitchMenu(MenuState.HUD);
+        }
+        else
+        {
+            MenuManager.SwitchMenu(MenuState.MainMenu);
+        }
+    }
+
+    private void OnSceneChanged(Scene oldScene, Scene newScene)
+    {
+        Debug.Log($"Scene changed from {oldScene.name} to {newScene.name}");
+        OnSceneLoad?.Invoke();
+    }
     public static void LoadLevel(string levelName)
     {
         // check if level is in levelcollection
@@ -34,6 +56,11 @@ public class GameManager : MonoBehaviour
         }
         SceneManager.LoadScene(levelName);
         ChangeGameState(GameState.Playing);
+    }
+
+    public static void RetryLevel()
+    {
+        LoadLevel(SceneManager.GetActiveScene().name);
     }
     public static void ChangeGameState(GameState newState)
     {

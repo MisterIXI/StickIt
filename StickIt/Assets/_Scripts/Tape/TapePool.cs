@@ -23,7 +23,7 @@ public class TapePool : MonoBehaviour
             return;
         }
         _tapePool = new Queue<TapeUpdater>();
-        _tapeSettings = Settingsmanager.Instance.TapeSettings;
+        _tapeSettings = SettingsManager.Instance.TapeSettings;
         SpawnObjects();
     }
 

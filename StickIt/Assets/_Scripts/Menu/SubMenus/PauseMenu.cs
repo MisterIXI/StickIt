@@ -1,7 +1,26 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenu : MenuBase
 {
+    [field: SerializeField] public Button ResumeButton { get; private set; }
+    [field: SerializeField] public Button RetryButton { get; private set; }
+    [field: SerializeField] public Button SettingsButton { get; private set; }
+    [field: SerializeField] public Button ControlsButton { get; private set; }
+    [field: SerializeField] public Button CreditsButton { get; private set; }
+    [field: SerializeField] public Button BackToMenuButton { get; private set; }
+
+
+    public override void Init()
+    {
+        ResumeButton.onClick.AddListener(ResumeGame);
+        RetryButton.onClick.AddListener(RetryLevel);
+        SettingsButton.onClick.AddListener(ToSettingsMenu);
+        ControlsButton.onClick.AddListener(ToControlsMenu);
+        CreditsButton.onClick.AddListener(ToCreditsMenu);
+        BackToMenuButton.onClick.AddListener(ToMainMenu);
+    }
+
 
     private void OnEnable()
     {
@@ -14,8 +33,13 @@ public class PauseMenu : MenuBase
         GameManager.ChangeGameState(GameState.Playing);
     }
 
-    public override void SelectFirst()
+    private void RetryLevel()
     {
-        throw new System.NotImplementedException();
+        GameManager.RetryLevel();
     }
+
+    // public override void SelectFirst()
+    // {
+    //     ResumeButton.Select();
+    // }
 }

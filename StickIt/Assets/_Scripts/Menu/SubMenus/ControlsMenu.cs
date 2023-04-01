@@ -1,9 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlsMenu : MenuBase
 {
-    public override void SelectFirst()
+    [field: SerializeField] public Button BackButton { get; private set; }
+
+    public override void Init()
     {
-        throw new System.NotImplementedException();
+        BackButton.onClick.AddListener(ToMainMenu);
     }
+    // public override void SelectFirst()
+    // {
+    //     BackButton.Select();
+    // }
 }

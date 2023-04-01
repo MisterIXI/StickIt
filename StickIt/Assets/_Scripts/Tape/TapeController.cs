@@ -20,7 +20,7 @@ public class TapeController : MonoBehaviour
         InputManager.OnLMB += OnLMBInput;
         InputManager.OnRMB += OnRMBInput;
         InputManager.OnMouseMove += OnMousePosInput;
-        _tapeSettings = Settingsmanager.Instance.TapeSettings;
+        _tapeSettings = SettingsManager.Instance.TapeSettings;
     }
     private void Update()
     {
@@ -69,6 +69,8 @@ public class TapeController : MonoBehaviour
 
     private void OnLMBInput(InputAction.CallbackContext context)
     {
+        // Debug.Log(GameManager.GameState);
+        if (GameManager.GameState != GameState.Playing) return;
         if (context.started)
         {
             StartTape();
@@ -81,6 +83,7 @@ public class TapeController : MonoBehaviour
 
     private void OnRMBInput(InputAction.CallbackContext context)
     {
+        if (GameManager.GameState != GameState.Playing) return;
         if (context.started)
         {
             if (_currentTape != null)

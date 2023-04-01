@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         Instance = this;
-        _playerSettings = Settingsmanager.Instance.PlayerSettings;
+        _playerSettings = SettingsManager.Instance.PlayerSettings;
         _groundedCheck = GetComponent<GroundedCheck>();
         _rb = GetComponent<Rigidbody2D>();
     }

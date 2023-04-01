@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class Settingsmanager : MonoBehaviour
+public class SettingsManager : MonoBehaviour
 {
-    private static Settingsmanager _instance;
-    public static Settingsmanager Instance
+    private static SettingsManager _instance;
+    public static SettingsManager Instance
     {
         get
         {
-            return _instance ?? FindObjectOfType<Settingsmanager>();
+            return _instance ?? FindObjectOfType<SettingsManager>();
         }
     }
     [field: SerializeField] public PlayerSettings PlayerSettings { get; private set; }

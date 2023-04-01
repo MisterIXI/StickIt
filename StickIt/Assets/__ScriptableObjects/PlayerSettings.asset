@@ -17,7 +17,7 @@ MonoBehaviour:
   <Acceleration>k__BackingField: 44.3
   <CayoteeTime>k__BackingField: 1.33
   <JumpVelocity>k__BackingField: 10
-  <JumpReleaseCap>k__BackingField: 5
+  <JumpReleaseCap>k__BackingField: 3
   <GroundedCheckLayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 119
