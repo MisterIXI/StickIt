@@ -4,6 +4,5 @@ using UnityEngine.SceneManagement;
 public class LevelSettings : ScriptableObject
 {
     [field: Header("Levelcollection")]
-    [field: SerializeField] public float LevelCount { get; private set; }
     [field: SerializeField] public string[] LevelCollection;
 }

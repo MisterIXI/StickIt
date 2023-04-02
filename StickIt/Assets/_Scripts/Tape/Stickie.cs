@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Stickie : MonoBehaviour
 {
+    public bool IsStuck { get; private set; }
     private Rigidbody2D _rb;
     private RigidbodyConstraints2D _constraints;
     private SpriteRenderer _spriteRenderer;
@@ -20,6 +21,7 @@ public class Stickie : MonoBehaviour
         if (stickCount == 1)
         {
             _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            IsStuck = true;
         }
     }
 
@@ -31,6 +33,7 @@ public class Stickie : MonoBehaviour
         {
             _rb.constraints = _constraints;
             _rb.WakeUp();
+            IsStuck = false;
         }
     }
 

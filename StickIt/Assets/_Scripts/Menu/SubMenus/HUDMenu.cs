@@ -22,6 +22,7 @@ public class HUDMenu : MenuBase
     }
     private void OnSceneChange(Scene oldScene, Scene newScene)
     {
+        Debug.Log($"HUD Scene update");
         FinishedHint.gameObject.SetActive(false);
         DeathHint.gameObject.SetActive(false);
         foreach (var rect in _ruleToRect.Values)
@@ -40,6 +41,7 @@ public class HUDMenu : MenuBase
             rule.GetComponentInChildren<TextMeshProUGUI>().text = "- " + rules[i].RuleDescription;
             _ruleToRect.Add(rules[i], ruleProgress);
         }
+        Debug.Log($"Rules: {rules.Length}");
         RuleManager.Instance.OnRuleChange += OnRuleChange;
         RuleManager.Instance.OnAllRulesCompleted += OnAllRulesCompleted;
     }

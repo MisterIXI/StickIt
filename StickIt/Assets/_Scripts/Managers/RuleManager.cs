@@ -6,7 +6,8 @@ public class RuleManager : MonoBehaviour
     [field: SerializeField] public BaseRule[] Rules { get; private set; }
     public event Action OnAllRulesCompleted;
     public event Action<RuleChangeType, BaseRule, float, bool> OnRuleChange;
-    private float _completedRules;
+    public event Action OnRuleActiveChange;
+    public float CompletedRules { get; private set; } = 0f;
     private void Awake()
     {
         if (Instance != null)
@@ -25,18 +26,20 @@ public class RuleManager : MonoBehaviour
 
     private void OnRuleCompletion(BaseRule rule)
     {
-        OnRuleChange?.Invoke(RuleChangeType.Completion, rule, 1f, true);
-        _completedRules++;
-        if (_completedRules == Rules.Length)
+        CompletedRules++;
+        if (CompletedRules == Rules.Length)
         {
             OnAllRulesCompleted?.Invoke();
             LevelManager.MarkCurrentLevelAsComplete();
             Debug.Log("All rules completed");
         }
+        OnRuleChange?.Invoke(RuleChangeType.Completion, rule, 1f, true);
+        OnRuleActiveChange?.Invoke();
     }
 
     private void OnRuleFailure(BaseRule rule)
     {
+        OnRuleActiveChange?.Invoke();
         OnRuleChange?.Invoke(RuleChangeType.Fail, rule, 0f, false);
     }
 

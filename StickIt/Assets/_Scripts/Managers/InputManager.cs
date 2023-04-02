@@ -25,6 +25,8 @@ public class InputManager : MonoBehaviour
     public static event Action<CallbackContext> OnLMB;
     public static event Action<CallbackContext> OnRMB;
     public static event Action<CallbackContext> OnJump;
+    public static event Action<CallbackContext> OnRestart;
+    public static event Action<CallbackContext> OnBackToMenu;
     public static event Action<CallbackContext> OnPause;
     private void OnMoveInput(CallbackContext context)
     {
@@ -49,6 +51,16 @@ public class InputManager : MonoBehaviour
     private void OnJumpInput(CallbackContext context)
     {
         OnJump?.Invoke(context);
+    }
+
+    private void OnRestartInput(CallbackContext context)
+    {
+        OnRestart?.Invoke(context);
+    }
+
+    private void OnBackToMenuInput(CallbackContext context)
+    {
+        OnBackToMenu?.Invoke(context);
     }
 
     private void OnPauseInput(CallbackContext context)
@@ -78,6 +90,14 @@ public class InputManager : MonoBehaviour
         _playerInput.actions["Jump"].performed += OnJumpInput;
         _playerInput.actions["Jump"].canceled += OnJumpInput;
 
+        _playerInput.actions["Restart"].started += OnRestartInput;
+        _playerInput.actions["Restart"].performed += OnRestartInput;
+        _playerInput.actions["Restart"].canceled += OnRestartInput;
+
+        _playerInput.actions["BackToMenu"].started += OnBackToMenuInput;
+        _playerInput.actions["BackToMenu"].performed += OnBackToMenuInput;
+        _playerInput.actions["BackToMenu"].canceled += OnBackToMenuInput;
+
         _playerInput.actions["Pause"].started += OnPauseInput;
         _playerInput.actions["Pause"].performed += OnPauseInput;
         _playerInput.actions["Pause"].canceled += OnPauseInput;
@@ -104,6 +124,14 @@ public class InputManager : MonoBehaviour
         _playerInput.actions["Jump"].started -= OnJumpInput;
         _playerInput.actions["Jump"].performed -= OnJumpInput;
         _playerInput.actions["Jump"].canceled -= OnJumpInput;
+
+        _playerInput.actions["Restart"].started -= OnRestartInput;
+        _playerInput.actions["Restart"].performed -= OnRestartInput;
+        _playerInput.actions["Restart"].canceled -= OnRestartInput;
+
+        _playerInput.actions["BackToMenu"].started -= OnBackToMenuInput;
+        _playerInput.actions["BackToMenu"].performed -= OnBackToMenuInput;
+        _playerInput.actions["BackToMenu"].canceled -= OnBackToMenuInput;
 
         _playerInput.actions["Pause"].started -= OnPauseInput;
         _playerInput.actions["Pause"].performed -= OnPauseInput;

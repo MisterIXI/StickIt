@@ -7,6 +7,8 @@ TagManager:
   - TapeCutter
   - Tape
   - Flag
+  - KillZone
+  - NoBreakZone
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - UI
   - Ground
   - TapeLayer
-  - 
+  - PlayerLayer
   - 
   - 
   - 

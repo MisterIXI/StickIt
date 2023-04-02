@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
         _levelSettings = SettingsManager.Instance.LevelSettings;
         OnGameStateChanged += OnGameStateChange;
         SceneManager.activeSceneChanged += OnSceneChanged;
+        InputManager.OnRestart += OnRestartInput;
+        InputManager.OnBackToMenu += OnBackToMenuInput;
     }
 
     private void Start()
@@ -66,6 +69,7 @@ public class GameManager : MonoBehaviour
 
     public static void RetryLevel()
     {
+        // SceneManager.LoadScene("MainScene");
         LoadLevel(SceneManager.GetActiveScene().name);
         GameManager.ChangeGameState(GameState.Playing);
     }
@@ -86,6 +90,17 @@ public class GameManager : MonoBehaviour
         if (newState == GameState.Playing)
             MenuManager.SwitchMenu(MenuState.HUD);
     }
+    private void OnRestartInput(InputAction.CallbackContext context)
+    {
+        if (context.performed && GameState == GameState.Playing)
+            RetryLevel();
+    }
+
+    private void OnBackToMenuInput(InputAction.CallbackContext context)
+    {
+        if (context.performed && GameState == GameState.Playing)
+            LoadMainMenu();
+    }
 
     private void OnDestroy()
     {
@@ -93,6 +108,9 @@ public class GameManager : MonoBehaviour
         {
             Instance = null;
             OnGameStateChanged -= OnGameStateChange;
+            SceneManager.activeSceneChanged -= OnSceneChanged;
+            InputManager.OnRestart -= OnRestartInput;
+            InputManager.OnBackToMenu -= OnBackToMenuInput;
         }
     }
 }

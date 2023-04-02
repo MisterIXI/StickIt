@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _moveVelocity;
     private Rigidbody2D _rb;
     private GroundedCheck _groundedCheck;
+    private bool _isBreaking = true;
     public static PlayerController Instance { get; private set; }
     private void Awake()
     {
@@ -42,8 +43,11 @@ public class PlayerController : MonoBehaviour
 
     private void MoveUpdate()
     {
-        float xVelocity = Mathf.MoveTowards(_rb.velocity.x, _moveInput.x * _playerSettings.MovementSpeed, _playerSettings.Acceleration * Time.fixedDeltaTime);
-        _rb.velocity = new Vector2(xVelocity, _rb.velocity.y);
+        if (_moveInput != Vector2.zero || _isBreaking)
+        {
+            float xVelocity = Mathf.MoveTowards(_rb.velocity.x, _moveInput.x * _playerSettings.MovementSpeed, _playerSettings.Acceleration * Time.fixedDeltaTime);
+            _rb.velocity = new Vector2(xVelocity, _rb.velocity.y);
+        }
     }
     private void OnMoveInput(InputAction.CallbackContext context)
     {
@@ -67,7 +71,8 @@ public class PlayerController : MonoBehaviour
         else if (context.canceled && _groundedCheck.IsJumping)
         {
             Vector2 velocity = _rb.velocity;
-            velocity.y = Mathf.Clamp(velocity.y, float.MinValue, _playerSettings.JumpReleaseCap);
+            if (velocity.y < _playerSettings.JumpVelocity * 2f)
+                velocity.y = Mathf.Clamp(velocity.y, float.MinValue, _playerSettings.JumpReleaseCap);
             _rb.velocity = velocity;
         }
     }
@@ -78,6 +83,20 @@ public class PlayerController : MonoBehaviour
         {
             OnPlayerDeath?.Invoke();
             _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+        else if (other.CompareTag("NoBreakZone"))
+        {
+            _isBreaking = false;
+            Debug.Log($"Player breaking: {_isBreaking}");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("NoBreakZone"))
+        {
+            _isBreaking = true;
+            Debug.Log($"Player breaking: {_isBreaking}");
         }
     }
     private void OnDestroy()

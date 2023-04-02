@@ -18,9 +18,10 @@ public abstract class BaseRule : MonoBehaviour
         RuleActive = false;
         OnRuleFailed?.Invoke(this);
     }
-    protected void RuleProgress(float change, bool isPositiveProgress)
+
+    protected void SetRuleProgress(float value, bool isPositiveProgress)
     {
-        CurrentProgress = Mathf.Clamp(CurrentProgress + change, 0f, 1f);
+        CurrentProgress = Mathf.Clamp(value, 0f, 1f);
         if (CurrentProgress >= 1f)
         {
             if (isPositiveProgress)
@@ -32,5 +33,10 @@ public abstract class BaseRule : MonoBehaviour
         {
             OnRuleProgress?.Invoke(this, CurrentProgress, isPositiveProgress);
         }
+    }
+    protected void RuleProgress(float change, bool isPositiveProgress)
+    {
+        CurrentProgress = Mathf.Clamp(CurrentProgress + change, 0f, 1f);
+        SetRuleProgress(CurrentProgress, isPositiveProgress);
     }
 }

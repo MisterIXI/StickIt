@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 public class GroundedCheck : MonoBehaviour
 {
     private PlayerSettings _playerSettings;
+    public static event Action<bool> OnGroundedStateChange;
     public bool IsGrounded { get; private set; } = false;
     private bool _drawGizmos => _playerSettings.GroundedCheckGizmos;
     private float _verticalOffset => _playerSettings.GroundedCheckVerticalOffset;
@@ -37,24 +38,31 @@ public class GroundedCheck : MonoBehaviour
     {
         bool newGrounded = Physics2D.OverlapBox(transform.position + Vector3.down * _verticalOffset, new Vector2(_checkWidth, _checkHeight), 0, _playerSettings.GroundedCheckLayerMask);
         if (newGrounded)
-            IsGrounded = true;
+            SetGroundedState(true);
         else
         {
             if (IsGrounded && Time.time - _lastGroundedTime > _playerSettings.CayoteeTime)
             {
-                IsGrounded = false;
+                SetGroundedState(false);
             }
         }
         if (_isGrounded && !newGrounded)
             _lastGroundedTime = Time.time;
         _isGrounded = newGrounded;
     }
-
+    private void SetGroundedState(bool newState)
+    {
+        if (IsGrounded != newState)
+        {
+            IsGrounded = newState;
+            OnGroundedStateChange?.Invoke(IsGrounded);
+        }
+    }
     private void OnJump()
     {
         IsJumping = true;
         _isGrounded = false;
-        IsGrounded = false;
+        SetGroundedState(false);
     }
 
     private void OnDestroy()
