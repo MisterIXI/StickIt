@@ -43,6 +43,25 @@ public class LevelManager : MonoBehaviour
                 SolvedLevels.Add(level);
         }
     }
+
+    public static bool IsLevelSolvedShortName(string levelShortName)
+    {
+        char levelChar = levelShortName[0];
+        string levelName = levelShortName.Substring(1);
+        switch (levelChar)
+        {
+            case 'L':
+                levelName = "Level" + levelName;
+                break;
+            case 'B':
+                levelName = "Bonus" + levelName;
+                break;
+            default:
+                Debug.LogError("Invalid level name: " + levelShortName);
+                break;
+        }
+        return SolvedLevels.Contains(levelName);
+    }
     private void OnDestroy()
     {
         if (Instance == this)

@@ -8,6 +8,8 @@ public class HUDMenu : MenuBase
 {
     [field: SerializeField] public TextMeshProUGUI RulesTopText { get; private set; }
     [field: SerializeField] public TextMeshProUGUI RulesBottomText { get; private set; }
+    [field: SerializeField] public RectTransform FinishedHint { get; private set; }
+    [field: SerializeField] public RectTransform DeathHint { get; private set; }
     [field: SerializeField] public Button PauseButton { get; private set; }
     [field: SerializeField] public RectTransform RulesPanel { get; private set; }
     [field: SerializeField] public RectTransform RulePrefab { get; private set; }
@@ -16,9 +18,16 @@ public class HUDMenu : MenuBase
     {
         PauseButton.onClick.AddListener(ToPauseMenu);
         SceneManager.activeSceneChanged += OnSceneChange;
+        PlayerController.OnPlayerDeath += OnPlayerDeath;
     }
     private void OnSceneChange(Scene oldScene, Scene newScene)
     {
+        FinishedHint.gameObject.SetActive(false);
+        DeathHint.gameObject.SetActive(false);
+        foreach (var rect in _ruleToRect.Values)
+        {
+            Destroy(rect.gameObject);
+        }
         _ruleToRect.Clear();
         SetHeaderStyle(false);
         if (newScene.name == "MainScene")
@@ -56,9 +65,15 @@ public class HUDMenu : MenuBase
         }
     }
 
+    private void OnPlayerDeath()
+    {
+        DeathHint.gameObject.SetActive(true);
+    }
+
     private void OnAllRulesCompleted()
     {
         SetHeaderStyle(true);
+        FinishedHint.gameObject.SetActive(true);
     }
 
     private void SetHeaderStyle(bool isFinished)
@@ -83,4 +98,10 @@ public class HUDMenu : MenuBase
     //     // set selection to null
     //     MenuManager.Instance.EventSystem.SetSelectedGameObject(null);
     // }
+
+    private void OnDestroy()
+    {
+        SceneManager.activeSceneChanged -= OnSceneChange;
+        PlayerController.OnPlayerDeath -= OnPlayerDeath;
+    }
 }

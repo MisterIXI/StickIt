@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
         _levelSettings = SettingsManager.Instance.LevelSettings;
         OnGameStateChanged += OnGameStateChange;
         SceneManager.activeSceneChanged += OnSceneChanged;
-        ChangeGameState(GameState.Playing);
     }
 
     private void Start()
@@ -58,9 +57,17 @@ public class GameManager : MonoBehaviour
         ChangeGameState(GameState.Playing);
     }
 
+    public static void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainScene");
+        ChangeGameState(GameState.Menu);
+        MenuManager.SwitchMenu(MenuState.MainMenu);
+    }
+
     public static void RetryLevel()
     {
         LoadLevel(SceneManager.GetActiveScene().name);
+        GameManager.ChangeGameState(GameState.Playing);
     }
     public static void ChangeGameState(GameState newState)
     {
@@ -71,10 +78,13 @@ public class GameManager : MonoBehaviour
     }
     private void OnGameStateChange(GameState oldState, GameState newState)
     {
+        Debug.Log($"Game state changed from {oldState} to {newState}");
         if (newState == GameState.Paused)
             Time.timeScale = 0;
         else
             Time.timeScale = 1;
+        if (newState == GameState.Playing)
+            MenuManager.SwitchMenu(MenuState.HUD);
     }
 
     private void OnDestroy()

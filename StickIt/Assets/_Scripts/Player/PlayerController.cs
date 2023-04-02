@@ -8,13 +8,14 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(GroundedCheck))]
 public class PlayerController : MonoBehaviour
 {
+    public static event Action OnPlayerDeath;
+    public static event Action OnJump;
     private PlayerSettings _playerSettings;
     private Vector2 _moveInput;
     private Vector2 _moveVelocity;
     private Rigidbody2D _rb;
     private GroundedCheck _groundedCheck;
     public static PlayerController Instance { get; private set; }
-    public static event Action OnJump;
     private void Awake()
     {
         if (Instance != null)
@@ -71,6 +72,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("KillZone"))
+        {
+            OnPlayerDeath?.Invoke();
+            _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+    }
     private void OnDestroy()
     {
         InputManager.OnMove -= OnMoveInput;

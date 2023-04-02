@@ -18,7 +18,7 @@ public class PauseMenu : MenuBase
         SettingsButton.onClick.AddListener(ToSettingsMenu);
         ControlsButton.onClick.AddListener(ToControlsMenu);
         CreditsButton.onClick.AddListener(ToCreditsMenu);
-        BackToMenuButton.onClick.AddListener(ToMainMenu);
+        BackToMenuButton.onClick.AddListener(BackToMainMenu);
     }
 
 
@@ -36,6 +36,11 @@ public class PauseMenu : MenuBase
     private void RetryLevel()
     {
         GameManager.RetryLevel();
+    }
+
+    private void BackToMainMenu()
+    {
+        GameManager.LoadMainMenu();
     }
 
     // public override void SelectFirst()

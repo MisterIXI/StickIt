@@ -15,8 +15,6 @@ public class RuleManager : MonoBehaviour
             return;
         }
         Instance = this;
-        transform.parent = null;
-        DontDestroyOnLoad(gameObject);
         foreach (var rule in Rules)
         {
             rule.OnRuleCompleted += OnRuleCompletion;
@@ -34,7 +32,7 @@ public class RuleManager : MonoBehaviour
             OnAllRulesCompleted?.Invoke();
             LevelManager.MarkCurrentLevelAsComplete();
             Debug.Log("All rules completed");
-        }   
+        }
     }
 
     private void OnRuleFailure(BaseRule rule)
