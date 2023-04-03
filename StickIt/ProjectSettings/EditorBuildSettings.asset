@@ -32,4 +32,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_zScenes/LevelScenes/Level08.unity
     guid: 74e6177e4f6194c4d8f0fd434ed8fce4
+  - enabled: 1
+    path: Assets/_zScenes/LevelScenes/Level09.unity
+    guid: c487165e8f7c0674482e051fcd8e9d31
+  - enabled: 1
+    path: Assets/_zScenes/LevelScenes/Level10.unity
+    guid: 6ad9fdab837bd95459255c2c97c22a7a
+  - enabled: 1
+    path: Assets/_zScenes/LevelScenes/Level11.unity
+    guid: 8aa95c7761432a04fb867b8b55f732d9
+  - enabled: 1
+    path: Assets/_zScenes/LevelScenes/Level12.unity
+    guid: ff4c2120d1d0a7f45abbae332620ddad
+  - enabled: 1
+    path: Assets/_zScenes/LevelScenes/Level13.unity
+    guid: d805cbeac93aab349879a9c9f67d3227
+  - enabled: 1
+    path: Assets/_zScenes/LevelScenes/Level14.unity
+    guid: 90a6e226a44027041824eb4e6deb11c6
+  - enabled: 1
+    path: Assets/_zScenes/LevelScenes/Level15.unity
+    guid: 5e2f34aee94a7274fbb6560c13c05230
   m_configObjects: {}

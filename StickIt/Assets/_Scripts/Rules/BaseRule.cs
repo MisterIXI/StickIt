@@ -12,11 +12,13 @@ public abstract class BaseRule : MonoBehaviour
     {
         RuleActive = false;
         OnRuleCompleted?.Invoke(this);
+        SoundManager.PlaySuccessSound();
     }
     protected void RuleFailed()
     {
         RuleActive = false;
         OnRuleFailed?.Invoke(this);
+        SoundManager.PlayFailSound();
     }
 
     protected void SetRuleProgress(float value, bool isPositiveProgress)

@@ -13,6 +13,7 @@ public class SettingsManager : MonoBehaviour
     [field: SerializeField] public PlayerSettings PlayerSettings { get; private set; }
     [field: SerializeField] public TapeSettings TapeSettings { get; private set; }
     [field: SerializeField] public LevelSettings LevelSettings { get; private set; }
+    [field: SerializeField] public SoundFiles SoundFiles { get; private set; }
     private void Awake()
     {
         if (Instance != null)

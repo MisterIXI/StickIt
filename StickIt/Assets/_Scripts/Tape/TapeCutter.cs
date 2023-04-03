@@ -40,6 +40,7 @@ public class TapeCutter : MonoBehaviour
             if (collider.TryGetComponent(out TapeUpdater tape))
             {
                 tape.CutIt();
+                SoundManager.PlayCutSound();
             }
         }
     }

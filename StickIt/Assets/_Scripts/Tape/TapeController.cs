@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class TapeController : MonoBehaviour
 {
+    public static event Action OnTapeFinished;
     private Vector2 _mouseInput;
     private Vector2 _mousePos;
     private Vector2 _tapeStartPos;
@@ -60,6 +62,7 @@ public class TapeController : MonoBehaviour
         {
             _currentTape.StickIt();
             _currentTape = null;
+            OnTapeFinished?.Invoke();
         }
         else
         {

@@ -47,3 +47,4 @@ MonoBehaviour:
   <PlayerSettings>k__BackingField: {fileID: 11400000, guid: 13be310fe33701042925221a364ff7a1, type: 2}
   <TapeSettings>k__BackingField: {fileID: 11400000, guid: 934f5b1b4cf75b448afcceb3d67de2c0, type: 2}
   <LevelSettings>k__BackingField: {fileID: 11400000, guid: 2b56dcab0b5db60489a904c56236ea05, type: 2}
+  <SoundFiles>k__BackingField: {fileID: 11400000, guid: 338a1088bd4db3947b02b7752ff146e5, type: 2}

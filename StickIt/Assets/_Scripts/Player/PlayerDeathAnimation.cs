@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerController))]
 public class PlayerDeathAnimation : MonoBehaviour
 {
+    public static event Action OnDeathAnimationPop;
     private PlayerController _playerController;
     [field: SerializeField] private SpriteRenderer _spriteRenderer;
     [field: SerializeField] private ParticleSystem _particleSystem;
@@ -36,6 +38,7 @@ public class PlayerDeathAnimation : MonoBehaviour
             yield return new WaitForSeconds(_deathAnimationDuration / 30f);
         }
         _spriteRenderer.enabled = false;
+        OnDeathAnimationPop?.Invoke();
     }
 
 

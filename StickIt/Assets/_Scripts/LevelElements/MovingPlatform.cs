@@ -7,8 +7,9 @@ public class MovingPlatform : MonoBehaviour
     [field: SerializeField] private bool _drawGizmos = false;
     [field: SerializeField] float _movementDuration = 1f;
     [field: SerializeField] bool _onlyPingNoPong = false;
-    [field: SerializeField][field: Range(3, 30)] int _gizmoSamplePoints = 10;
+    [field: SerializeField][field: Range(3, 100)] int _gizmoSamplePoints = 10;
     [field: SerializeField][field: Range(0f, 1f)] float _startPoint = 0.5f;
+    [field: SerializeField] private bool _randomStartPoint = false;
     [field: SerializeField] private AnimationCurve _movementX;
     [field: SerializeField] private AnimationCurve _movementY;
 
@@ -16,6 +17,8 @@ public class MovingPlatform : MonoBehaviour
 
     private void Start()
     {
+        if (_randomStartPoint)
+            _startPoint = Random.value;
         _animationTime = _startPoint * _movementDuration;
     }
 
